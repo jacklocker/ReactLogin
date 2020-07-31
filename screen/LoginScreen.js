@@ -10,8 +10,10 @@ import {
   TouchableOpacity,
   Image,
   ScrollView,
-  Picker,
+  Picker
 } from 'react-native';
+
+
 
 //import {SocialIcon, Avatar} from 'react-native-elements';
 
@@ -107,7 +109,7 @@ const LoginScreen = (props) => {
               <View style={styles.signupView}>
                 <TouchableOpacity
                   style={styles.signupButton}
-                  onPress={() => props.buttonClickEvents('welcome')}>
+                  onPress={() => props.name.navigate('WelcomeScreenPage')}>
                   <Text style={styles.textStyle}>LOGIN</Text>
                 </TouchableOpacity>
               </View>
@@ -124,7 +126,7 @@ const LoginScreen = (props) => {
               <Text> Terms & condition and Privacy Policy of </Text>
               <Text> Dont have an account?</Text>
               <Text
-                onPress={() => props.buttonClickEvents('register')}
+                onPress={() => props.name.navigate('WelcomeScreenPage')}
                 style={{color: 'blue'}}>
                 Sign Up
               </Text>

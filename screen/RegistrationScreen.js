@@ -55,7 +55,7 @@ const RegistrationScreen = (props) => {
   };
   const goToNextPage = () => {
    
-    props.buttonClickEvents('welcome')
+    props.name.navigate('WelcomeScreenPage')
   };
   const checkName = (e) => {
     var letters = /^[A-Za-z]+$/;
@@ -137,6 +137,7 @@ const RegistrationScreen = (props) => {
   };
 
   return (
+    
     <ScrollView>
       <View>
         <StatusBar barStyle="dark-content" />
@@ -209,6 +210,7 @@ const RegistrationScreen = (props) => {
               <View style={styles.signupView}>
                 <TouchableOpacity
                   style={styles.registerButton}
+                  
                   onPress={checkFormComplete}>
                   {formData.isValidConfirmButton ? null : null}
                   <Text style={styles.textStyle}>REGISTER</Text>

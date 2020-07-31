@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {View, StyleSheet, SafeAreaView, StatusBar, Button, Image, TouchableOpacity,Text} from 'react-native';
-
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 const LoginScreen = (props) => {
   return (
     <View>
@@ -19,14 +20,14 @@ const LoginScreen = (props) => {
             <View style={styles.signupView}>
               <TouchableOpacity
                 style={styles.signupButton}
-                onPress={() => props.buttonClickEvents('Login')}>
+                onPress={() => props.name.navigate('LoginScreenPage')}>
                 <Text style={styles.textStyle}>SIGN UP</Text>
               </TouchableOpacity>
             </View>
             <View style={styles.signupView}>
               <TouchableOpacity
                 style={styles.registerButton}
-                onPress={() => props.buttonClickEvents('register')}>
+                onPress={() => props.name.navigate('RegisterScreenPage')}>
                 <Text style={styles.textStyle}>REGISTER</Text>
               </TouchableOpacity>
             </View>
