@@ -1,4 +1,4 @@
-import React, {useState, useEffect, Fragment} from 'react';
+import React, {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 
 import LoginScreen from './screen/LoginScreen';
@@ -8,9 +8,11 @@ import WelcomePage from './screen/WelcomePage';
 export default function App() {
   const [screenToDisplay, setScreenToDisplay] = useState();
   const [whichButton, setWhichButton] = useState('');
+  const [valueEmail, setValueEmail] = useState('');
 
-  const buttonClickEvent = (id) => {
+  const buttonClickEvent = (id, valueEntered) => {
     setWhichButton(id);
+    setValueEmail(valueEntered);
   };
 
   let content = <LandingPage buttonClickEvents={buttonClickEvent} />;
@@ -19,7 +21,13 @@ export default function App() {
   } else if (whichButton === 'register') {
     content = <RegistrationScreen buttonClickEvents={buttonClickEvent} />;
   } else if (whichButton === 'welcome') {
-    content = <WelcomePage buttonClickEvents={buttonClickEvent} />;
+    content = (
+      <WelcomePage
+        buttonClickEvents={buttonClickEvent}
+        todo={valueEmail}
+        buttonClickEvents={buttonClickEvent}
+      />
+    );
   } else {
     content = <LandingPage buttonClickEvents={buttonClickEvent} />;
   }

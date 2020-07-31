@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   View,
   StyleSheet,
@@ -10,11 +10,55 @@ import {
   TouchableOpacity,
   Image,
   ScrollView,
+  Picker,
 } from 'react-native';
 
 //import {SocialIcon, Avatar} from 'react-native-elements';
 
 const LoginScreen = (props) => {
+  const [formData, setFormDate] = useState({
+    isValidEmail: true,
+
+    isValidPassword: true,
+  });
+  const [selectedValue, setSelectedValue] = useState('Select Handler');
+  const [enteredValue, setEnteredValue] = useState('');
+  const textInputHandler = (inputText) => {
+    setEnteredValue(inputText);
+  };
+  const checkPassword = (e) => {
+    var paswd = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,15}$/;
+    if (e.trim().length === 0 || !e.match(paswd)) {
+      setFormDate({
+        ...formData,
+        isValidPassword: false,
+      });
+      return;
+    } else {
+      setFormDate({
+        ...formData,
+        isValidPassword: true,
+      });
+    }
+  };
+  const checkEmail = (e) => {
+    if (
+      e.trim().length === 0 ||
+      !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(e)
+    ) {
+      setFormDate({
+        ...formData,
+        isValidEmail: false,
+      });
+      return;
+    } else {
+      setFormDate({
+        ...formData,
+        isValidEmail: true,
+      });
+    }
+  };
+
   return (
     <ScrollView>
       <View>
@@ -29,13 +73,37 @@ const LoginScreen = (props) => {
               }}
             />
           </View>
+          <View style={styles.pickercontainer}>
+            <Picker
+              selectedValue={selectedValue}
+              style={{height: 50, width: 150}}
+              onValueChange={(itemValue, itemIndex) =>
+                setSelectedValue(itemValue)
+              }>
+              <Picker.Item label="Select" value="default" />
+              <Picker.Item label="Driver" value="driver" />
+              <Picker.Item label="User" value="user" />
+            </Picker>
+          </View>
           <View style={styles.body}>
             <View style={styles.inputContainerView}>
               <TextInput
+                onChangeText={textInputHandler}
                 style={styles.inputContainer}
                 placeholder="USER NAME"
+                onEndEditing={(e) => checkEmail(e.nativeEvent.text)}
               />
-              <TextInput style={styles.inputContainer} placeholder="PASSWORD" />
+              {formData.isValidEmail ? null : (
+                <Text style={styles.errorMessage}>Invalid User Name</Text>
+              )}
+              <TextInput
+                style={styles.inputContainer}
+                placeholder="PASSWORD"
+                onEndEditing={(e) => checkPassword(e.nativeEvent.text)}
+              />
+              {formData.isValidPassword ? null : (
+                <Text style={styles.errorMessage}>Invalid Password</Text>
+              )}
               <View style={styles.signupView}>
                 <TouchableOpacity
                   style={styles.signupButton}
@@ -79,6 +147,9 @@ const styles = StyleSheet.create({
     width: 150,
     height: 150,
   },
+  errorMessage: {
+    color: 'red',
+  },
   body: {
     backgroundColor: '#ffffff',
   },
@@ -91,6 +162,10 @@ const styles = StyleSheet.create({
   },
   inputIconSpace: {
     flexDirection: 'row',
+  },
+  pickercontainer: {
+    marginTop: 20,
+    alignItems: 'center',
   },
   inputContainer: {
     width: '70%',

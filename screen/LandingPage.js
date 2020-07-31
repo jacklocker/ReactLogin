@@ -1,20 +1,9 @@
 import React, {useState} from 'react';
-import {
-  View,
-  StyleSheet,
-  SafeAreaView,
-  StatusBar,
-  Button,
-  Image,
-  TouchableOpacity,
-  Text,
-} from 'react-native';
-
-//import { SocialIcon, Avatar } from "react-native-elements";
+import {View, StyleSheet, SafeAreaView, StatusBar, Button} from 'react-native';
 
 const LoginScreen = (props) => {
   return (
-    <View>      
+    <View>
       <SafeAreaView>
         <View style={styles.iconHeader}>
           <Image
@@ -39,7 +28,7 @@ const LoginScreen = (props) => {
                 style={styles.registerButton}
                 onPress={() => props.buttonClickEvents('register')}>
                 <Text style={styles.textStyle}>REGISTER</Text>
-              </TouchableOpacity>              
+              </TouchableOpacity>
             </View>
           </View>
         </View>
@@ -83,19 +72,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  registerButton:{
+  registerButton: {
     height: 50,
     backgroundColor: '#919191',
     borderRadius: 50,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   signupButton: {
     height: 50,
     backgroundColor: '#202646',
     borderRadius: 50,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   textStyle: {
     fontSize: 20,
