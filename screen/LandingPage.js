@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, StyleSheet, SafeAreaView, StatusBar, Button} from 'react-native';
+import {View, StyleSheet, SafeAreaView, StatusBar, Button, Image, TouchableOpacity,Text} from 'react-native';
 
 const LoginScreen = (props) => {
   return (
