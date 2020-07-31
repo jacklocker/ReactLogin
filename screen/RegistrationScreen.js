@@ -27,10 +27,35 @@ const RegistrationScreen = (props) => {
     isValidPhoneNumber: true,
     isValidPassword: true,
     isValidConfirmPassword: true,
+    isValidConfirmButton: true
   });
 
   const textInputHandler = (inputText) => {
     setEnteredValue(inputText);
+  };
+  const checkFormComplete = () => {
+    
+
+    if (!formData.isValidName || !formData.isValidEmail || !formData.isValidPhoneNumber || !formData.isValidPassword || !formData.isValidConfirmButton) {
+      setFormDate({
+        ...formData,
+        isValidConfirmButton: false,
+        
+      });
+      return;
+    } else {
+      setFormDate({
+        ...formData,
+        isValidConfirmButton: true,
+        
+      });
+      
+      goToNextPage();
+    }
+  };
+  const goToNextPage = () => {
+   
+    props.buttonClickEvents('welcome')
   };
   const checkName = (e) => {
     var letters = /^[A-Za-z]+$/;
@@ -95,6 +120,21 @@ const RegistrationScreen = (props) => {
       });
     }
   };
+  const checkConfirePassword = (e) => {
+    var paswd = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,15}$/;
+    if (e.trim().length === 0 || !e.match(paswd)) {
+      setFormDate({
+        ...formData,
+        isValidConfirmPassword: false,
+      });
+      return;
+    } else {
+      setFormDate({
+        ...formData,
+        isValidConfirmPassword: true,
+      });
+    }
+  };
 
   return (
     <ScrollView>
@@ -138,7 +178,7 @@ const RegistrationScreen = (props) => {
                 placeholder="EMAIL"
                 onEndEditing={(e) => checkEmail(e.nativeEvent.text)}
               />
-              {formData.isValidPhoneNumber ? null : (
+              {formData.isValidEmail ? null : (
                 <Text style={styles.errorMessage}>Invalid Email</Text>
               )}
               <TextInput
@@ -146,7 +186,7 @@ const RegistrationScreen = (props) => {
                 placeholder="PHONE NUMBER"
                 onEndEditing={(e) => checkPhone(e.nativeEvent.text)}
               />
-              {formData.isValidName ? null : (
+              {formData.isValidPhoneNumber ? null : (
                 <Text style={styles.errorMessage}>Invalid Phone Number</Text>
               )}
               <TextInput
@@ -160,6 +200,7 @@ const RegistrationScreen = (props) => {
               <TextInput
                 style={styles.inputContainer}
                 placeholder="CONFIRM PASSWORD"
+                onEndEditing={(e) => checkConfirePassword(e.nativeEvent.text)}
               />
               {formData.isValidConfirmPassword ? null : (
                 <Text style={styles.errorMessage}>Password Do Not Match</Text>
@@ -168,7 +209,8 @@ const RegistrationScreen = (props) => {
               <View style={styles.signupView}>
                 <TouchableOpacity
                   style={styles.registerButton}
-                  onPress={() => props.buttonClickEvents('welcome')}>
+                  onPress={checkFormComplete}>
+                  {formData.isValidConfirmButton ? null : null}
                   <Text style={styles.textStyle}>REGISTER</Text>
                 </TouchableOpacity>
               </View>
@@ -223,6 +265,9 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  errorMessage: {
+    color: 'red',
   },
   textStyle: {
     fontSize: 20,
