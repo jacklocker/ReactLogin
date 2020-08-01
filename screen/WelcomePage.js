@@ -6,12 +6,14 @@ import {
   SafeAreaView,
   StatusBar,
   Image,
+  ScrollView
 } from 'react-native';
 
 //import {SocialIcon, Avatar, Button } from 'react-native-elements';
 
 const WelcomePage = (props) => {
   return (
+    <ScrollView>
     <View>
       <SafeAreaView>
         <View style={styles.iconHeader}>
@@ -30,7 +32,7 @@ const WelcomePage = (props) => {
 
           <View style={styles.logoutText}>
             <Text
-              onPress={() => props.buttonClickEvents('')}
+              onPress={() => props.name.navigate('LandingHome')}
               style={{color: 'blue'}}>
               Logout
             </Text>
@@ -38,6 +40,7 @@ const WelcomePage = (props) => {
         </View>
       </SafeAreaView>
     </View>
+    </ScrollView>
   );
 };
 

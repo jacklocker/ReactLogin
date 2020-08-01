@@ -31,10 +31,10 @@ function RegisterPageScreen({navigation}) {
   );
 }
 
-function WelcomePageScreen() {
+function WelcomePageScreen({navigation}) {
   return (
     <View>
-      <WelcomePage />
+      <WelcomePage name={navigation} />
     </View>
   );
 }
@@ -45,13 +45,13 @@ function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="LandingHome">
-        <Stack.Screen name="LandingHome" component={LandingHomeScreen} />
-        <Stack.Screen name="LoginScreenPage" component={LoginPageScreen} />
+        <Stack.Screen name="LandingHome" component={LandingHomeScreen} options={{ title: '', headerShown: false }} />
+        <Stack.Screen name="LoginScreenPage" component={LoginPageScreen} options={{ title: 'Login'}} />
         <Stack.Screen
           name="RegisterScreenPage"
-          component={RegisterPageScreen}
+          component={RegisterPageScreen} options={{ title: 'Register'}}
         />
-        <Stack.Screen name="WelcomeScreenPage" component={WelcomePageScreen} />
+        <Stack.Screen name="WelcomeScreenPage" component={WelcomePageScreen} options={{ title: 'Welcome'}} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -151,6 +151,8 @@ const RegistrationScreen = (props) => {
               }}
             />
           </View>
+          
+          <View style={styles.body}>
           <View style={styles.pickercontainer}>
             <Picker
               selectedValue={selectedValue}
@@ -163,7 +165,6 @@ const RegistrationScreen = (props) => {
               <Picker.Item label="User" value="user" />
             </Picker>
           </View>
-          <View style={styles.body}>
             <View style={styles.inputContainerView}>
               <TextInput
                 onChangeText={textInputHandler}
