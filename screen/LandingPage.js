@@ -35,6 +35,7 @@ const LoginScreen = (props) => {
             <Text style={styles.textStyle}>REGISTER</Text>
           </TouchableOpacity>
         </View>
+        
       </View>
     </SafeAreaView>
   );

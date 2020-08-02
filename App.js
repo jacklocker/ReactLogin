@@ -1,11 +1,12 @@
-import React from 'react';
-import {View} from 'react-native';
+import React, {useEffect} from 'react';
+import { View} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import LandingPage from './screen/LandingPage';
 import LoginScreen from './screen/LoginScreen';
 import RegistrationScreen from './screen/RegistrationScreen';
 import WelcomePage from './screen/WelcomePage';
+import SplashScreen from 'react-native-splash-screen'
 
 function LandingHomeScreen({navigation}) {
   return (
@@ -42,6 +43,12 @@ function WelcomePageScreen({navigation}) {
 const Stack = createStackNavigator();
 
 function App() {
+
+  useEffect(() => {
+SplashScreen.hide();
+
+  }, [] );
+
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="LandingHome">
