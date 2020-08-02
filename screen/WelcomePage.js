@@ -4,12 +4,9 @@ import {
   StyleSheet,
   Text,
   SafeAreaView,
-  StatusBar,
   Image,
   ScrollView
 } from 'react-native';
-
-//import {SocialIcon, Avatar, Button } from 'react-native-elements';
 
 const WelcomePage = (props) => {
   return (
@@ -25,7 +22,7 @@ const WelcomePage = (props) => {
             }}
           />
         </View>
-        <View style={styles.body}>
+        <View>
           <View style={styles.welcomeText}>
             <Text style={styles.innerText}>Welcome</Text>
           </View>
@@ -46,14 +43,14 @@ const WelcomePage = (props) => {
 
 const styles = StyleSheet.create({
   iconHeader: {
-    marginTop: '40%',
+    marginTop: '25%',
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: '10%',
   },
   tinyLogo: {
-    width: 150,
-    height: 150,
+    width: 160,
+    height: 160,
   },
   logoutText: {
     alignItems: 'center',

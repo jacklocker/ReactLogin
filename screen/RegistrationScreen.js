@@ -1,20 +1,15 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
   View,
   StyleSheet,
   SafeAreaView,
   ScrollView,
-  StatusBar,
   TextInput,
-  Button,
   Text,
   Image,
   TouchableOpacity,
   Picker,
 } from 'react-native';
-
-//import {Header, Colors} from 'react-native/Libraries/NewAppScreen';
-//import { SocialIcon, Avatar } from "react-native-elements";
 
 const RegistrationScreen = (props) => {
   const [enteredValue, setEnteredValue] = useState('');
@@ -27,35 +22,36 @@ const RegistrationScreen = (props) => {
     isValidPhoneNumber: true,
     isValidPassword: true,
     isValidConfirmPassword: true,
-    isValidConfirmButton: true
+    isValidConfirmButton: true,
   });
 
   const textInputHandler = (inputText) => {
     setEnteredValue(inputText);
   };
   const checkFormComplete = () => {
-    
-
-    if (!formData.isValidName || !formData.isValidEmail || !formData.isValidPhoneNumber || !formData.isValidPassword || !formData.isValidConfirmButton) {
+    if (
+      !formData.isValidName ||
+      !formData.isValidEmail ||
+      !formData.isValidPhoneNumber ||
+      !formData.isValidPassword ||
+      !formData.isValidConfirmButton
+    ) {
       setFormDate({
         ...formData,
         isValidConfirmButton: false,
-        
       });
       return;
     } else {
       setFormDate({
         ...formData,
         isValidConfirmButton: true,
-        
       });
-      
+
       goToNextPage();
     }
   };
   const goToNextPage = () => {
-   
-    props.name.navigate('WelcomeScreenPage')
+    props.name.navigate('WelcomeScreenPage');
   };
   const checkName = (e) => {
     var letters = /^[A-Za-z]+$/;
@@ -137,11 +133,9 @@ const RegistrationScreen = (props) => {
   };
 
   return (
-    
-    <ScrollView>
-      <View>
-        <StatusBar barStyle="dark-content" />
-        <SafeAreaView>
+    <SafeAreaView>
+      <ScrollView>
+        <View>
           <View style={styles.iconHeader}>
             <Image
               style={styles.tinyLogo}
@@ -151,20 +145,20 @@ const RegistrationScreen = (props) => {
               }}
             />
           </View>
-          
-          <View style={styles.body}>
-          <View style={styles.pickercontainer}>
-            <Picker
-              selectedValue={selectedValue}
-              style={{height: 50, width: 150}}
-              onValueChange={(itemValue, itemIndex) =>
-                setSelectedValue(itemValue)
-              }>
-              <Picker.Item label="Select" value="default" />
-              <Picker.Item label="Driver" value="driver" />
-              <Picker.Item label="User" value="user" />
-            </Picker>
-          </View>
+
+          <View>
+            <View style={styles.pickercontainer}>
+              <Picker
+                selectedValue={selectedValue}
+                style={{height: 50, width: 150}}
+                onValueChange={(itemValue, itemIndex) =>
+                  setSelectedValue(itemValue)
+                }>
+                <Picker.Item label="Select" value="default" />
+                <Picker.Item label="Driver" value="driver" />
+                <Picker.Item label="User" value="user" />
+              </Picker>
+            </View>
             <View style={styles.inputContainerView}>
               <TextInput
                 onChangeText={textInputHandler}
@@ -211,17 +205,18 @@ const RegistrationScreen = (props) => {
               <View style={styles.signupView}>
                 <TouchableOpacity
                   style={styles.registerButton}
-                  
                   onPress={checkFormComplete}>
-                  {formData.isValidConfirmButton ? null : null}
+                  {formData.isValidConfirmButton
+                    ? null
+                    : alert('Fill Complete Form')}
                   <Text style={styles.textStyle}>REGISTER</Text>
                 </TouchableOpacity>
               </View>
             </View>
           </View>
-        </SafeAreaView>
-      </View>
-    </ScrollView>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
@@ -230,26 +225,19 @@ const styles = StyleSheet.create({
     marginTop: '10%',
     justifyContent: 'center',
     alignItems: 'center',
+    marginBottom: '10%',
   },
   tinyLogo: {
     width: 150,
     height: 150,
   },
-  body: {
-    backgroundColor: '#ffffff',
-  },
-  scrollView: {
-    backgroundColor: '#ffffff',
-  },
   inputContainerView: {
+    marginTop: '2%',
     justifyContent: 'center',
     alignItems: 'center',
   },
-  inputIconSpace: {
-    flexDirection: 'row',
-  },
   inputContainer: {
-    width: '70%',
+    width: '75%',
     marginTop: 10,
     borderRadius: 10,
     borderBottomWidth: 1,
@@ -259,12 +247,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   pickercontainer: {
-    marginTop: 20,
     alignItems: 'center',
   },
   registerButton: {
     height: 50,
-    backgroundColor: '#919191',
+    backgroundColor: '#86848c',
     borderRadius: 50,
     alignItems: 'center',
     justifyContent: 'center',
@@ -280,19 +267,7 @@ const styles = StyleSheet.create({
   signupView: {
     marginTop: '5%',
     width: '70%',
-  },
-  socialMediaStyle: {
-    width: '65%',
-    marginTop: 30,
-  },
-  footerText: {
-    marginTop: '10%',
-    color: '#C0C0C0',
-    fontSize: 18,
-    textAlign: 'justify',
-    justifyContent: 'center',
-    alignItems: 'center',
-    lineHeight: 50,
+    marginBottom: '5%',
   },
 });
 

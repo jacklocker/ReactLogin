@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, View, Text} from 'react-native';
+import {View} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import LandingPage from './screen/LandingPage';
@@ -46,7 +46,7 @@ function App() {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="LandingHome">
         <Stack.Screen name="LandingHome" component={LandingHomeScreen} options={{ title: '', headerShown: false }} />
-        <Stack.Screen name="LoginScreenPage" component={LoginPageScreen} options={{ title: 'Login'}} />
+        <Stack.Screen name="LoginScreenPage" component={LoginPageScreen} options={{ title: 'Login'}}  />
         <Stack.Screen
           name="RegisterScreenPage"
           component={RegisterPageScreen} options={{ title: 'Register'}}

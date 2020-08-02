@@ -4,18 +4,12 @@ import {
   StyleSheet,
   Text,
   SafeAreaView,
-  StatusBar,
   TextInput,
-  Button,
   TouchableOpacity,
   Image,
   ScrollView,
-  Picker
+  Picker,
 } from 'react-native';
-
-
-
-//import {SocialIcon, Avatar} from 'react-native-elements';
 
 const LoginScreen = (props) => {
   const [formData, setFormDate] = useState({
@@ -62,10 +56,9 @@ const LoginScreen = (props) => {
   };
 
   return (
-    <ScrollView>
-      <View>
-        <StatusBar barStyle="dark-content" />
-        <SafeAreaView>
+    <SafeAreaView>
+      <ScrollView>
+        <View>
           <View style={styles.iconHeader}>
             <Image
               style={styles.tinyLogo}
@@ -87,7 +80,7 @@ const LoginScreen = (props) => {
               <Picker.Item label="User" value="user" />
             </Picker>
           </View>
-          <View style={styles.body}>
+          <View>
             <View style={styles.inputContainerView}>
               <TextInput
                 onChangeText={textInputHandler}
@@ -113,18 +106,15 @@ const LoginScreen = (props) => {
                   <Text style={styles.textStyle}>LOGIN</Text>
                 </TouchableOpacity>
               </View>
-
-              {/* <View style={styles.socialMediaStyle}>
-                
-                <SocialIcon iconSize={20} title="Sign In With Google" button type="google" />
-                <SocialIcon iconSize={20} title="Sign In With Facebook" button type="facebook"/>
-              </View> */}
             </View>
 
-            <View style={styles.footerText}>
-              <Text>By Signing in, you agree to</Text>
-              <Text> Terms & condition and Privacy Policy of </Text>
-              <Text> Dont have an account?</Text>
+            <View style={styles.footerTextContainer}>
+              <Text style={styles.footerText}>By Signing in, you agree to</Text>
+              <Text style={styles.footerText}>
+                {' '}
+                Terms & condition and Privacy Policy of{' '}
+              </Text>
+              <Text style={styles.footerText}> Dont have an account?</Text>
               <Text
                 onPress={() => props.name.navigate('WelcomeScreenPage')}
                 style={{color: 'blue'}}>
@@ -132,9 +122,9 @@ const LoginScreen = (props) => {
               </Text>
             </View>
           </View>
-        </SafeAreaView>
-      </View>
-    </ScrollView>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
@@ -152,28 +142,20 @@ const styles = StyleSheet.create({
   errorMessage: {
     color: 'red',
   },
-  body: {
-    backgroundColor: '#ffffff',
-  },
-  scrollView: {
-    backgroundColor: '#ffffff',
-  },
   inputContainerView: {
+    marginTop: '4%',
     justifyContent: 'center',
     alignItems: 'center',
   },
-  inputIconSpace: {
-    flexDirection: 'row',
-  },
+
   pickercontainer: {
-    marginTop: 20,
     alignItems: 'center',
   },
   inputContainer: {
-    width: '70%',
-    marginTop: 10,
+    width: '75%',
+    marginTop: 15,
     borderRadius: 10,
-    borderBottomWidth: 1,
+    borderBottomWidth: 2,
     borderColor: '#c1c1c1',
     backgroundColor: 'white',
     alignItems: 'center',
@@ -196,18 +178,15 @@ const styles = StyleSheet.create({
     marginTop: '5%',
     width: '70%',
   },
-  socialMediaStyle: {
-    width: '65%',
-    marginTop: 30,
-  },
-  footerText: {
+  footerTextContainer: {
     marginTop: '10%',
     color: '#C0C0C0',
-    fontSize: 18,
-    textAlign: 'justify',
     justifyContent: 'center',
     alignItems: 'center',
     lineHeight: 50,
+  },
+  footerText: {
+    fontSize: 12,
   },
 });
 
