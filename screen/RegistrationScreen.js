@@ -10,13 +10,30 @@ import {
   TouchableOpacity,
   Picker,
 } from 'react-native';
+import axios from 'axios';
 
 const RegistrationScreen = (props) => {
   const [enteredValue, setEnteredValue] = useState('');
 
   const [selectedValue, setSelectedValue] = useState('Select Handler');
 
+  const url = 'http://clients.aksinteractive.com/a4a-new/member-apis/Users/profileUpdate';
+
+
+  const uid = "124";
+  const fnam = "ffhfhfghgfjh";
+  const lnam = "Yatin";
+  const city = 135;
+  const address = "test";
+  const dob = "2006-08-16";
+  const doa = "2013-08-13";
+  const snam =  "xyz";
+
+
+
+
   const [formData, setFormDate] = useState({
+    fnam : '',
     isValidName: true,
     isValidEmail: true,
     isValidPhoneNumber: true,
@@ -50,7 +67,35 @@ const RegistrationScreen = (props) => {
       goToNextPage();
     }
   };
+
+
+
+  const bodyFormData = new FormData();
+  bodyFormData.append('userId', "124");
+  bodyFormData.append('firstName', fnam);
+  bodyFormData.append('userImg', "http://clients.aksinteractive.com/a4a-new/assets/uploads/profile_images/83e69da71c4e5fa6a88fd6254a92b70f.jpg");
+  bodyFormData.append('lastName', "Yatin");
+  bodyFormData.append('city', 135);
+  bodyFormData.append('address', "test");
+  bodyFormData.append('dateOfBirth', "2006-08-16");
+  bodyFormData.append('dateOfAnniversary', "2013-08-13");
+  bodyFormData.append('spouseName', "xyz");
+
+
+
+  const createPostMethoc = () => {
+    axios.post(url, bodyFormData)
+    .then((response) => {
+        alert(JSON.stringify(response.data.userDetails.first_name))
+    }).catch((error) =>{
+        alert(error.message)
+    })
+  };
+
+
+
   const goToNextPage = () => {
+    createPostMethoc();
     props.name.navigate('WelcomeScreenPage');
   };
   const checkName = (e) => {
@@ -66,6 +111,7 @@ const RegistrationScreen = (props) => {
       setFormDate({
         ...formData,
         isValidName: true,
+        fnam: "raj",
       });
     }
   };

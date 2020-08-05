@@ -6,7 +6,8 @@ import LandingPage from './screen/LandingPage';
 import LoginScreen from './screen/LoginScreen';
 import RegistrationScreen from './screen/RegistrationScreen';
 import WelcomePage from './screen/WelcomePage';
-import SplashScreen from 'react-native-splash-screen'
+import SplashScreen from 'react-native-splash-screen';
+import ApiScreen from './screen/ApiScreen'
 
 function LandingHomeScreen({navigation}) {
   return (
@@ -28,6 +29,14 @@ function RegisterPageScreen({navigation}) {
   return (
     <View>
       <RegistrationScreen name={navigation} />
+    </View>
+  );
+}
+
+function ApiPageScreen({navigation}) {
+  return (
+    <View>
+      <ApiScreen name={navigation} />
     </View>
   );
 }
@@ -59,6 +68,7 @@ SplashScreen.hide();
           component={RegisterPageScreen} options={{ title: 'Register'}}
         />
         <Stack.Screen name="WelcomeScreenPage" component={WelcomePageScreen} options={{ title: 'Welcome'}} />
+        <Stack.Screen name="ApiScreenPage" component={ApiPageScreen} options={{ title: 'Detail'}} />
       </Stack.Navigator>
     </NavigationContainer>
   );
