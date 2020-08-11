@@ -159,7 +159,7 @@ const LoginScreen = (props) => {
               </Text>
               <Text style={styles.footerText}> Dont have an account?</Text>
               <Text
-                onPress={() => props.name.navigate('WelcomeScreenPage')}
+                onPress={() => props.name.navigate('RegisterScreenPage')}
                 style={{color: 'blue'}}>
                 Sign Up
               </Text>

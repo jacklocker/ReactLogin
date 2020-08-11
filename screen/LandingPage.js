@@ -8,21 +8,53 @@ import {
   Text,
   ScrollView
 } from 'react-native';
-
+import ViewPager from '@react-native-community/viewpager';
+import SwiperFlatList from 'react-native-swiper-flatlist';
 
 const LoginScreen = (props) => {
-  //console.log(props)
+
   return (
     <SafeAreaView>
       <ScrollView>
-      <View style={styles.iconHeader}>
-        <Image
-          style={styles.tinyLogo}
-          source={{
-            uri:
-              'https://media.glassdoor.com/sql/1036334/aks-it-services-squarelogo-1525843901819.png',
-          }}
-        />
+      <View >
+    
+
+      <View style= {styles.forPager}>
+      
+      <SwiperFlatList
+          //autoplay
+          //autoplayDelay={2}
+          //autoplayLoop
+          index={0}
+          showPagination
+        >
+          <View style={styles.one}>
+            <Image
+            style={styles.tinyLogo}
+        source={require('../images/aks-it-services-squarelogo-1525843901819.png')}
+             />
+          </View>
+          <View style={styles.two}>
+          <Image
+            style={styles.tinyLogo}
+        source={require('../images/1200px-SNice.svg.png')}
+             />
+          </View>
+          <View style={styles.three}>
+          <Image
+            style={styles.tinyLogo}
+        source={require('../images/hqdefault.jpg')}
+             />
+          </View>
+        </SwiperFlatList>
+      </View>
+
+
+
+
+
+
+
       </View>
       <View style={styles.inputContainerView}>
         <View style={styles.signupView}>
@@ -41,18 +73,15 @@ const LoginScreen = (props) => {
         </View>
         
       </View>
+
+      
       </ScrollView>
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-  iconHeader: {
-    marginTop: '25%',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: '10%',
-  },
+ 
   tinyLogo: {
     width: 150,
     height: 150,
@@ -84,6 +113,47 @@ const styles = StyleSheet.create({
     marginTop: '5%',
     width: '70%',
   },
+  forPager: {
+    marginTop: '25%',
+    width: 150,
+    height: 150,
+    backgroundColor: 'green',
+    //marginBottom: 100,
+    marginLeft: 100
+  },
+  page: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  viewPager: {
+    flex: 1,
+  },
+  one: {
+    width: 150,
+    height: 150,
+    backgroundColor: 'red'
+  },
+  two: {
+    width: 150,
+    height: 150,
+  backgroundColor: 'pink'
+
+  },
+  three: {
+    width: 150,
+    height: 150,
+  backgroundColor: 'yellow'
+
+  },
+  child: {
+    height: '100%',
+    width: '100%',
+    justifyContent: 'center'
+  },
+  text: {
+    fontSize: 20,
+    textAlign: 'center'
+  }
 });
 
 export default LoginScreen;
