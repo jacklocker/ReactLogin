@@ -10,21 +10,53 @@ import {
   ScrollView,
   Picker,
 } from 'react-native';
-
+import FooterPart from '../components/FooterPart';
 const LoginScreen = (props) => {
   const [formData, setFormDate] = useState({
     isValidEmail: true,
-
+    isValidConfirmButton: true,
     isValidPassword: true,
   });
   const [selectedValue, setSelectedValue] = useState('Select Handler');
-  const [enteredValue, setEnteredValue] = useState('');
-  const textInputHandler = (inputText) => {
-    setEnteredValue(inputText);
+  const [enteredLoginValue, setEnteredLoginValue] = useState('');
+  const [enteredPasswordValue, setEnteredPasswordValue] = useState('');
+  const textLoginInputHandler = (inputTextEmail) => {
+    setEnteredLoginValue(inputTextEmail);
   };
-  const checkPassword = (e) => {
+  const textPasswordInputHandler = (inputTextPassword) => {
+    setEnteredPasswordValue(inputTextPassword);
+  };
+
+
+  const checkFormComplete = () => {
+
+    const email = enteredLoginValue;
+    const password = enteredPasswordValue;
+
+    if (email.length > 0 && password.length > 0 && formData.isValidEmail &&
+      formData.isValidPassword ) {
+      goToNextPage();
+    }
+    else{
+      setFormDate({
+        ...formData,
+        isValidConfirmButton: false,
+      });
+      return;
+    }
+
+  };
+
+
+
+    const goToNextPage = () => {
+      props.name.navigate('WelcomeScreenPage');
+    };
+
+
+  const checkPassword = (enteredPasswordValue) => {
     var paswd = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,15}$/;
-    if (e.trim().length === 0 || !e.match(paswd)) {
+    if (enteredPasswordValue.trim().length === 0 || !enteredPasswordValue.match(paswd)) {
       setFormDate({
         ...formData,
         isValidPassword: false,
@@ -57,6 +89,7 @@ const LoginScreen = (props) => {
 
   return (
     <SafeAreaView>
+    
       <ScrollView>
         <View>
           <View style={styles.iconHeader}>
@@ -82,19 +115,24 @@ const LoginScreen = (props) => {
           </View>
           <View>
             <View style={styles.inputContainerView}>
+            
               <TextInput
-                onChangeText={textInputHandler}
+                onChangeText={textLoginInputHandler}
                 style={styles.inputContainer}
                 placeholder="USER NAME"
+                autoFocus={true}
+                value={enteredLoginValue}
                 onEndEditing={(e) => checkEmail(e.nativeEvent.text)}
               />
               {formData.isValidEmail ? null : (
                 <Text style={styles.errorMessage}>Invalid User Name</Text>
               )}
               <TextInput
+              onChangeText={textPasswordInputHandler}
                 style={styles.inputContainer}
                 placeholder="PASSWORD"
-                onEndEditing={(e) => checkPassword(e.nativeEvent.text)}
+                value={enteredPasswordValue}
+                onEndEditing={(enteredPasswordValue) => checkPassword(enteredPasswordValue.nativeEvent.text)}
               />
               {formData.isValidPassword ? null : (
                 <Text style={styles.errorMessage}>Invalid Password</Text>
@@ -102,7 +140,12 @@ const LoginScreen = (props) => {
               <View style={styles.signupView}>
                 <TouchableOpacity
                   style={styles.signupButton}
-                  onPress={() => props.name.navigate('WelcomeScreenPage')}>
+                  onPress={checkFormComplete}
+                  //onPress={() => props.name.navigate('WelcomeScreenPage')}
+                  >
+                  {/* {formData.isValidConfirmButton
+                    ? null
+                    : alert("jhk")} */}
                   <Text style={styles.textStyle}>LOGIN</Text>
                 </TouchableOpacity>
               </View>
@@ -123,7 +166,11 @@ const LoginScreen = (props) => {
             </View>
           </View>
         </View>
+        
+        
       </ScrollView>
+     
+      
     </SafeAreaView>
   );
 };
@@ -161,7 +208,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-
+foter: {
+        position: 'absolute',
+        bottom: 0,
+        height:45,
+        width: "100%"
+},
   signupButton: {
     height: 50,
     backgroundColor: '#202646',
@@ -180,6 +232,7 @@ const styles = StyleSheet.create({
   },
   footerTextContainer: {
     marginTop: '10%',
+    marginBottom: '17%',
     color: '#C0C0C0',
     justifyContent: 'center',
     alignItems: 'center',

@@ -7,6 +7,7 @@ import {
   Image,
   ScrollView
 } from 'react-native';
+import FlatlistFormat from '../components/FlatlistFormat';
 
 const WelcomePage = (props) => {
   return (
@@ -27,6 +28,9 @@ const WelcomePage = (props) => {
             <Text style={styles.innerText}>Welcome</Text>
           </View>
 
+<View>
+  <FlatlistFormat />
+</View>
           <View style={styles.logoutText}>
             <Text
               onPress={() => props.name.navigate('LandingHome')}

@@ -6,11 +6,15 @@ import {
   Image,
   TouchableOpacity,
   Text,
+  ScrollView
 } from 'react-native';
 
+
 const LoginScreen = (props) => {
+  //console.log(props)
   return (
     <SafeAreaView>
+      <ScrollView>
       <View style={styles.iconHeader}>
         <Image
           style={styles.tinyLogo}
@@ -37,6 +41,7 @@ const LoginScreen = (props) => {
         </View>
         
       </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };

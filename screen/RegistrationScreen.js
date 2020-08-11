@@ -15,11 +15,53 @@ import ImagePicker from 'react-native-image-picker';
 import {decode as atob, encode as btoa} from 'base-64';
 import RNFetchBlob from 'rn-fetch-blob';
 import DatePicker from 'react-native-datepicker';
+import FooterPart from '../components/FooterPart';
 
 const RegistrationScreen = (props) => {
   const [enteredValue, setEnteredValue] = useState('');
 
   const [selectedValue, setSelectedValue] = useState('Select Handler');
+
+
+  const [ enteredFirstName, setenteredFirstName  ] = useState('');
+  const [ enteredLastName, setenteredLastName ] = useState('');
+  const [ enteredEmail, setenteredEmail ] = useState('');
+  const [ enteredPassword,  setenteredPassword] = useState('');
+  const [ enteredConfirmPassword, setenteredConfirmPassword ] = useState('');
+  const [ enteredPhoneNumber, setenteredPhoneNumber] = useState('');
+  const [ enteredAddress, setenteredAddress] = useState('');
+
+
+
+  const textFInputHandler = (i) => {
+    setenteredFirstName(i);
+  };
+
+  const textLInputHandler = (i) => {
+    setenteredLastName(i);
+  };
+
+  const textEInputHandler = (i) => {
+    setenteredEmail(i);
+  };
+  const textPInputHandler = (i) => {
+    setenteredPassword(i);
+  };
+  const textCPInputHandler = (i) => {
+    setenteredConfirmPassword(i);
+  };
+  const textPhInputHandler = (i) => {
+    setenteredPhoneNumber(i);
+  };
+  const textAdInputHandler = (i) => {
+    setenteredAddress(i);
+  };
+
+
+
+  
+
+
 
   const url =
     'http://clients.aksinteractive.com/a4a-new/member-apis/Users/profileUpdate';
@@ -92,27 +134,41 @@ const RegistrationScreen = (props) => {
     setEnteredValue(inputText);
   };
   const checkFormComplete = () => {
-    if (
-      !formData.isValidfName ||
-      !formData.isValidfName ||
-      !formData.isValidAddress ||
-      !formData.isValidEmail ||
-      !formData.isValidPhoneNumber ||
-      !formData.isValidPassword ||
-      !formData.isValidConfirmButton
+
+    const fname = enteredFirstName;
+    const lneme = enteredLastName;
+    const emnail = enteredEmail;
+    const pass = enteredPassword;
+    const cpass = enteredConfirmPassword;
+    const phn = enteredPhoneNumber;
+    const add = enteredAddress;
+
+
+
+  if (fname.length>0 && lneme.length>0 && emnail.length>0 && 
+    pass.length>0 && cpass.length>0 && phn.length>0 &&
+    add.length>0 &&
+      formData.isValidfName &&
+      formData.isValidfName &&
+      formData.isValidAddress &&
+      formData.isValidEmail &&
+      formData.isValidPhoneNumber &&
+      formData.isValidPassword &&
+      formData.isValidConfirmButton
     ) {
-      setFormDate({
-        ...formData,
-        isValidConfirmButton: false,
-      });
-      return;
-    } else {
       setFormDate({
         ...formData,
         isValidConfirmButton: true,
       });
-
       goToNextPage();
+      //return;
+    } else {
+      setFormDate({
+        ...formData,
+        isValidConfirmButton: false,
+      });
+return;
+      
     }
   };
 
@@ -309,18 +365,21 @@ const RegistrationScreen = (props) => {
             </View>
             <View style={styles.inputContainerView}>
               <TextInput
-                onChangeText={textInputHandler}
+                onChangeText={textFInputHandler}
                 style={styles.inputContainer}
                 placeholder="FIRST NAME"
+                autoFocus= {true}
+                value={enteredFirstName}
                 onEndEditing={(e) => checkfName(e.nativeEvent.text)}
               />
               {formData.isValidfName ? null : (
                 <Text style={styles.errorMessage}>Invalid User Name</Text>
               )}
               <TextInput
-                onChangeText={textInputHandler}
+                onChangeText={textLInputHandler}
                 style={styles.inputContainer}
                 placeholder="LAST NAME"
+                value={enteredLastName}
                 onEndEditing={(e) => checklName(e.nativeEvent.text)}
               />
               {formData.isValidlName ? null : (
@@ -328,8 +387,10 @@ const RegistrationScreen = (props) => {
               )}
 
               <TextInput
+              onChangeText={textEInputHandler}
                 style={styles.inputContainer}
                 placeholder="EMAIL"
+                value={enteredEmail}
                 onEndEditing={(e) => checkEmail(e.nativeEvent.text)}
               />
               {formData.isValidEmail ? null : (
@@ -337,16 +398,20 @@ const RegistrationScreen = (props) => {
               )}
 
               <TextInput
+              onChangeText={textPInputHandler}
                 style={styles.inputContainer}
                 placeholder="PASSWORD"
+                value={enteredPassword}
                 onEndEditing={(e) => checkPassword(e.nativeEvent.text)}
               />
               {formData.isValidPassword ? null : (
                 <Text style={styles.errorMessage}>Invalid Password</Text>
               )}
               <TextInput
+              onChangeText={textCPInputHandler}
                 style={styles.inputContainer}
                 placeholder="CONFIRM PASSWORD"
+                value={enteredConfirmPassword}
                 onEndEditing={(e) => checkConfirePassword(e.nativeEvent.text)}
               />
               {formData.isValidConfirmPassword ? null : (
@@ -355,7 +420,9 @@ const RegistrationScreen = (props) => {
 
               <TextInput
                 style={styles.inputContainer}
+                onChangeText={textPhInputHandler}
                 placeholder="PHONE NUMBER"
+                value={enteredPhoneNumber}
                 onEndEditing={(e) => checkPhone(e.nativeEvent.text)}
               />
               {formData.isValidPhoneNumber ? null : (
@@ -364,8 +431,10 @@ const RegistrationScreen = (props) => {
 
               <TextInput
                 onChangeText={textInputHandler}
+                onChangeText={textAdInputHandler}
                 style={styles.inputContainer}
                 placeholder="ADDRESS"
+                value={enteredAddress}
                 onEndEditing={(e) => checkAddress(e.nativeEvent.text)}
               />
               {formData.isValidAddress ? null : (
@@ -422,9 +491,9 @@ const RegistrationScreen = (props) => {
                 <TouchableOpacity
                   style={styles.registerButton}
                   onPress={checkFormComplete}>
-                  {formData.isValidConfirmButton
+                  {/* {formData.isValidConfirmButton
                     ? null
-                    : alert('Fill Complete Form')}
+                    : alert('Fill Complete Form')} */}
                   <Text style={styles.textStyle}>REGISTER</Text>
                 </TouchableOpacity>
               </View>
@@ -432,6 +501,7 @@ const RegistrationScreen = (props) => {
           </View>
         </View>
       </ScrollView>
+      
     </SafeAreaView>
   );
 };
@@ -447,6 +517,12 @@ const styles = StyleSheet.create({
     width: 150,
     height: 150,
   },
+  foter: {
+    position: 'absolute',
+    bottom: 0,
+    height:45,
+    width: "100%"
+},
   inputContainerView: {
     marginTop: '2%',
     justifyContent: 'center',
@@ -481,9 +557,9 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   signupView: {
-    marginTop: '2%',
+    //marginTop: '2%',
     width: '70%',
-    marginBottom: '5%',
+    marginBottom: '20%',
   },
   imagePickerbutton: {
     width: 100,
